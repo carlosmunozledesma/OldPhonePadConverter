@@ -9,13 +9,13 @@ namespace OldPhonePadConverter
         {
             if (string.IsNullOrEmpty(input) || !input.Contains(Keypads.LastCharacterSentinel))
             {
-                return "";
+                return string.Empty;
             }
 
             var result = new StringBuilder();
             int position = 0;
 
-            // Iterate all the message until the centinela character is found
+            // Iterate all the message until the sentinel character is found
             while (input[position] != Keypads.LastCharacterSentinel)
             {
                 char currentChar = input[position];
@@ -24,35 +24,49 @@ namespace OldPhonePadConverter
                     // Check backspaces using *
                     if (currentChar == Keypads.BackspaceCharacter)
                     {
-                        if (result.Length > 0)
-                        {
-                            result.Remove(result.Length - 1, 1);
-                        }
+                        RemoveBackspace(result);
                         position++;
                         continue;
                     }
 
-                    // Check how many times are pressed the same button consecutively
+                    // Check how many times are pressed the same button consecutively and update position and counter
                     int count = 1;
-                    while (position + 1 < input.Length && input[position + 1] == currentChar)
-                    {
-                        count++;
-                        position++;
-                    }
+                    SameButtonPressed(input, ref position, ref count);
 
-                    // Get the characters from the dictionary
+                    // Get the characters from the dictionary and append the correct character to the result
                     string charactersFromDic = Keypads.OldKeypadDictionary[currentChar];
-                    if (charactersFromDic.Length > 0)
-                    {
-                        // Index of the character to select
-                        int index = (count - 1) % charactersFromDic.Length;
-                        result.Append(charactersFromDic[index]);
-                    }
+                    AddCharactersToResult(result, charactersFromDic, count);
+                    
                 }
                 // Next character
                 position++;
             }
             return result.ToString();
+        }
+
+        private static void RemoveBackspace(StringBuilder result)
+        {
+            if (result.Length > 0)
+                result.Remove(result.Length - 1, 1);
+        }
+
+        private static void SameButtonPressed(string input, ref int position, ref int count)
+        {
+            while (position + 1 < input.Length && input[position + 1] == input[position])
+            {
+                count++;
+                position++;
+            }
+        }
+
+        private static void AddCharactersToResult(StringBuilder result, string charactersFromDic, int count)
+        {
+            if (charactersFromDic.Length > 0)
+            {
+                // Index of the character to select
+                int index = (count - 1) % charactersFromDic.Length;
+                result.Append(charactersFromDic[index]);
+            }
         }
     }
 }
