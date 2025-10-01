@@ -22,4 +22,15 @@
         public const char BackspaceCharacter = '*';
         public const string Exit = "exit";
     }
+
+    public static class Messages
+    {
+        public const string HyphenMenu = "-------------------------------------------";
+        public const string TitleMenu = "----- Old Phone Pad Converter to Text -----";
+        public const string ExplanationMenu = "Type a message with '#' at the end or write 'exit' to stop the program.";
+        public const string NewLine = "\r";
+        public const string EnterMessage = "Enter a message to convert: ";
+        public const string EmptyOrIncompletedMessage = "No message entered or incompleted, add # at the end.";
+        public const string OutputMessage = "Old Phone Pad output: ";
+    }
 }

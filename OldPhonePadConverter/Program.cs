@@ -20,21 +20,23 @@ namespace OldPhonePadConverter
 
         private static void ShowGreedings()
         {
-            Console.WriteLine("-------------------------------------------");
-            Console.WriteLine("----- Old Phone Pad Converter to Text -----");
-            Console.WriteLine("-------------------------------------------");
-
-            Console.WriteLine("Write exit to stop the program.");
+            Console.WriteLine(Constants.Messages.HyphenMenu);
+            Console.WriteLine(Constants.Messages.TitleMenu);
+            Console.WriteLine(Constants.Messages.HyphenMenu);
+            Console.WriteLine(Constants.Messages.NewLine);
+            Console.WriteLine(Constants.Messages.ExplanationMenu);
         }
 
         private static string GetMessageFromUser()
         {
-            Console.WriteLine("Enter a message to convert: ");
+            Console.WriteLine(Constants.Messages.NewLine);
+            Console.WriteLine(Constants.Messages.EnterMessage);
             string? message = Console.ReadLine();
             while (string.IsNullOrEmpty(message) || !message.Contains(Constants.Keypads.LastCharacterSentinel))
             {
-                Console.WriteLine("No message entered or incompleted, add # at the end.");
-                Console.WriteLine("Enter a message to convert:");
+                Console.WriteLine(Constants.Messages.EmptyOrIncompletedMessage);
+                Console.WriteLine(Constants.Messages.NewLine);
+                Console.WriteLine(Constants.Messages.EnterMessage);
                 message = Console.ReadLine();
             }
             return message;
@@ -48,7 +50,7 @@ namespace OldPhonePadConverter
 
         private static void ShowResult(string result)
         {
-            Console.WriteLine("Old Phone Pad output: " + result);
+            Console.WriteLine(Constants.Messages.OutputMessage + result);
         }
     }
 }
