@@ -34,7 +34,7 @@ namespace OldPhonePadConverter
             string? message = Console.ReadLine();
             while (string.IsNullOrEmpty(message) || !message.Contains(Constants.Keypads.LastCharacterSentinel))
             {
-                if (IsMessageToExit(message))
+                if (!string.IsNullOrEmpty(message) && IsMessageToExit(message))
                 {
                     return message;
                 }

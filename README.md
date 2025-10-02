@@ -35,6 +35,15 @@ OldPhonePad(“8 88777444666*664#”) => output: TURING
 4.	Run with Ctrl+F5.
 5.	Follow the prompts in the console.
 
+If you prefer to download the zip file, here there are the instructions to restore packages:
+
+`dotnet restore --force --no-cache`
+
+`dotnet build`
+
+`dotnet test`
+
+
 ## 🧪 Running Tests
 This solution includes an **XUnit test project** (`OldPhonePadConverter.Tests`).
 
